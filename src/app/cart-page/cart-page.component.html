@@ -1,0 +1,50 @@
+<app-not-found
+  [visible]="!cart || cart.items.length <= 0"
+  notFoundMessage="A carroça está vazia!"
+  resetLinkText="Voltar ao mural"
+></app-not-found>
+
+<div *ngIf="cart && cart.items.length > 0" class="container">
+  <ul>
+    <li *ngFor="let cartItem of cart.items">
+      <div>
+        <img [src]="cartItem.Quests.imageUrl" [alt]="cartItem.Quests.name" />
+      </div>
+      <div>
+        <a routerLink="/Quests/{{ cartItem.Quests.id }}">
+          {{ cartItem.Quests.name }}
+        </a>
+      </div>
+      <div>
+        <select
+          #quantitySelect
+          (change)="changeQuantity(cartItem, quantitySelect.value)"
+        >
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+        </select>
+      </div>
+      <div>
+        {{ cartItem.price | currency }}
+      </div>
+      <div>
+        <button class="remove-button" (click)="removeFromCart(cartItem)">
+          Remover
+        </button>
+      </div>
+    </li>
+  </ul>
+
+  <div class="checkout">
+    <div>
+      <div class="Quests-count">{{ cart.items.length }}</div>
+      <div class="total-price">{{ cart.totalPrice | currency }}</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<app-search></app-search>
+
+<app-tags></app-tags>
+
+<app-not-found
+  [visible]="!quests || quests.length <= 0"
+  resetLinkText="Voltar ao mural"
+></app-not-found>
+
+<ul>
+  <li *ngFor="let quest of quests">
+    <a routerLink="/quest/{{ quest.id }}">
+      <img src="{{ quest.imageUrl }}" style="height: 270px;" />
+
+      <div class="content">
+        <div class="name">
+          {{ quest.name }}
+        </div>
+        <span class="favorite {{ quest.favorite ? '' : 'not' }}"> ❤ </span>
+        <div class="stars"></div>
+        <div class="product-itemfooter">
+          <div class="origins">
+            <span *ngFor="let origin of quest.origins"> 
+              {{ origin }}
+            </span>
+          </div>
+          <div class="time">
+            <span>⏰</span>
+            {{ quest.time }} dias
+          </div>
+        </div>
+        <div class="price">
+          <span>
+            {{ quest.price | currency }}
+          </span>
+        </div>
+      </div>
+    </a>
+  </li>
+</ul>

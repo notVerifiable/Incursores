@@ -1,0 +1,34 @@
+<app-not-found>
+  [visible]="!quests"
+  notFoundMessage="Missão não encontrada!"
+  resetLinkText="Voltar ao mural"
+</app-not-found>
+
+<div *ngIf="quests" class="container">
+  <img [src]="quests.imageUrl" [alt]="quests.name" />
+  <div class="details">
+    <div class="header">
+      <span class="name">
+        {{ quests.name }}
+      </span>
+      <span class="favorite not"> ❤ </span>
+    </div>
+    <div class="origins">
+      <span *ngFor="let origin of quests.origins">
+        {{ origin }}
+      </span>
+    </div>
+    <div class="tags">
+      <app-tags [questsPageTags]="quests.tags" justifyContent="start"></app-tags>
+    </div>
+    <div class="time">
+      <span>
+        Podemos concluir em <strong>{{ quests.time }}</strong> dias
+      </span>
+    </div>
+    <div class="price">
+      <span>{{ quests.price | currency }}</span>
+    </div>
+    <button (click)="addToCart()">Adicionar à carroça</button>
+  </div>
+</div>
